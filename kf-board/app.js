@@ -312,18 +312,30 @@
     arr.forEach(g => {
       const card = document.createElement('div');
       card.className = 'rule-card';
+      state.__rule_open = state.__rule_open || {};
+      if (state.__rule_open[g.rule]) card.classList.add('open');
       const fixedCount = g.items.filter(({file,f}) => {
         const s = getStatus(fid(file, f));
         return s === 'fixed' || s === 'wontfix';
       }).length;
+      const sevCounts = { ERROR: 0, WARN: 0, INFO: 0 };
+      g.items.forEach(({f}) => sevCounts[f.severity]++);
+      const sevClass = sevCounts.ERROR ? 'error' : sevCounts.WARN ? 'warn' : 'info';
       card.innerHTML = `
         <div class="rule-card-head">
+          <svg class="rule-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          <span class="severity-badge ${sevClass}" style="width:auto; padding:3px 8px;">${sevCounts.ERROR ? 'ERROR' : sevCounts.WARN ? 'WARN' : 'INFO'}</span>
           <span class="rid">${g.rule}</span>
           <span class="rdesc">${escapeHtml(RULES[g.rule] || '')}</span>
           <span class="rcount">${fixedCount} / ${g.items.length} resolved</span>
         </div>
         <div class="rule-files"></div>
       `;
+      card.querySelector('.rule-card-head').addEventListener('click', () => {
+        card.classList.toggle('open');
+        state.__rule_open[g.rule] = card.classList.contains('open');
+        saveState();
+      });
       const files = card.querySelector('.rule-files');
       g.items.forEach(({file, f}) => {
         const id = fid(file, f);
