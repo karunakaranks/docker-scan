@@ -321,6 +321,29 @@
       const sevCounts = { ERROR: 0, WARN: 0, INFO: 0 };
       g.items.forEach(({f}) => sevCounts[f.severity]++);
       const sevClass = sevCounts.ERROR ? 'error' : sevCounts.WARN ? 'warn' : 'info';
+      // Pick up to 2 distinct example lines (dedup by trimmed content)
+      const seen = new Set();
+      const samples = [];
+      for (const { file, f } of g.items) {
+        if (!f.line_text) continue;
+        const key = f.line_text.trim();
+        if (seen.has(key)) continue;
+        seen.add(key);
+        samples.push({ file, line: f.line, text: f.line_text });
+        if (samples.length >= 2) break;
+      }
+      const samplesHtml = samples.length ? `
+        <div class="rule-samples">
+          <div class="rule-samples-label">example${samples.length > 1 ? 's' : ''}</div>
+          ${samples.map(s => `
+            <div class="rule-sample">
+              <div class="rule-sample-loc">${escapeHtml(s.file)}${s.line ? ` · line ${s.line}` : ''}</div>
+              <pre class="rule-sample-code">${escapeHtml(s.text)}</pre>
+            </div>
+          `).join('')}
+        </div>
+      ` : '';
+
       card.innerHTML = `
         <div class="rule-card-head">
           <svg class="rule-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
@@ -329,6 +352,7 @@
           <span class="rdesc">${escapeHtml(RULES[g.rule] || '')}</span>
           <span class="rcount">${fixedCount} / ${g.items.length} resolved</span>
         </div>
+        ${samplesHtml}
         <div class="rule-files"></div>
       `;
       card.querySelector('.rule-card-head').addEventListener('click', () => {

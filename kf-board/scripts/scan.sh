@@ -53,6 +53,22 @@ import json, os, sys
 src, root, out = sys.argv[1], sys.argv[2], sys.argv[3]
 prefix = root.rstrip('/') + '/'
 data = json.load(open(src))
+
+line_cache = {}
+def get_line(abs_path, line_no):
+    if not line_no or line_no <= 0:
+        return None
+    if abs_path not in line_cache:
+        try:
+            with open(abs_path) as f:
+                line_cache[abs_path] = f.read().splitlines()
+        except Exception:
+            line_cache[abs_path] = []
+    lines = line_cache[abs_path]
+    if 0 < line_no <= len(lines):
+        return lines[line_no - 1].rstrip()
+    return None
+
 clean = []
 for d in data:
     rel = d['file'].replace(prefix, '')
@@ -61,6 +77,13 @@ for d in data:
         service = '/'.join(parts[:-1])
     else:
         service = parts[0]
+    abs_path = os.path.join(root, rel)
+    findings = []
+    for fnd in d['findings']:
+        lt = get_line(abs_path, fnd.get('line', 0))
+        if lt is not None:
+            fnd['line_text'] = lt
+        findings.append(fnd)
     clean.append({
         'file': rel,
         'service': service,
@@ -68,7 +91,7 @@ for d in data:
         'errors': d['errors'],
         'warnings': d['warnings'],
         'infos': d['infos'],
-        'findings': d['findings'],
+        'findings': findings,
     })
 clean.sort(key=lambda x: (-x['errors']*100 - x['warnings']*10 - x['infos'], x['file']))
 import datetime as dt
