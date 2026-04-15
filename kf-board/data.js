@@ -5,8 +5,8 @@ window.SCAN_DATA = {
   "tool_version": "0.1.0",
   "files": [
     {
-      "file": "./admin/Dockerfile-job",
-      "service": ".",
+      "file": "admin/Dockerfile-job",
+      "service": "admin",
       "total": 21,
       "errors": 1,
       "warnings": 10,
@@ -162,8 +162,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./automation/account_clone/Dockerfile",
-      "service": ".",
+      "file": "automation/account_clone/Dockerfile",
+      "service": "automation/account_clone",
       "total": 12,
       "errors": 1,
       "warnings": 8,
@@ -256,8 +256,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./analyticsmigration/Dockerfile",
-      "service": ".",
+      "file": "analyticsmigration/Dockerfile",
+      "service": "analyticsmigration",
       "total": 11,
       "errors": 1,
       "warnings": 5,
@@ -343,8 +343,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./automation/automation/Dockerfile",
-      "service": ".",
+      "file": "automation/automation/Dockerfile",
+      "service": "automation/automation",
       "total": 5,
       "errors": 1,
       "warnings": 3,
@@ -388,8 +388,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./base/Dockerfile",
-      "service": ".",
+      "file": "base/Dockerfile",
+      "service": "base",
       "total": 6,
       "errors": 1,
       "warnings": 2,
@@ -440,8 +440,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./batchuser/Dockerfile",
-      "service": ".",
+      "file": "batchuser/Dockerfile",
+      "service": "batchuser",
       "total": 5,
       "errors": 1,
       "warnings": 2,
@@ -485,8 +485,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./externalconnection/Dockerfile",
-      "service": ".",
+      "file": "externalconnection/Dockerfile",
+      "service": "externalconnection",
       "total": 19,
       "errors": 0,
       "warnings": 9,
@@ -628,8 +628,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./automation/mongo_backup/Dockerfile",
-      "service": ".",
+      "file": "automation/mongo_backup/Dockerfile",
+      "service": "automation/mongo_backup",
       "total": 13,
       "errors": 0,
       "warnings": 7,
@@ -729,8 +729,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./apidocs/Dockerfile",
-      "service": ".",
+      "file": "apidocs/Dockerfile",
+      "service": "apidocs",
       "total": 6,
       "errors": 0,
       "warnings": 3,
@@ -781,8 +781,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./admin/Dockerfile",
-      "service": ".",
+      "file": "admin/Dockerfile",
+      "service": "admin",
       "total": 5,
       "errors": 0,
       "warnings": 3,
@@ -826,8 +826,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./lowcode/Dockerfile",
-      "service": ".",
+      "file": "lowcode/Dockerfile",
+      "service": "lowcode",
       "total": 5,
       "errors": 0,
       "warnings": 2,
@@ -871,8 +871,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./accounts/Dockerfile",
-      "service": ".",
+      "file": "accounts/Dockerfile",
+      "service": "accounts",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -909,8 +909,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./analytics/Dockerfile",
-      "service": ".",
+      "file": "analytics/Dockerfile",
+      "service": "analytics",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -947,8 +947,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./analyticssyncworker/Dockerfile",
-      "service": ".",
+      "file": "analyticssyncworker/Dockerfile",
+      "service": "analyticssyncworker",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -985,8 +985,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./application/Dockerfile",
-      "service": ".",
+      "file": "application/Dockerfile",
+      "service": "application",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1023,8 +1023,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./appstore/Dockerfile",
-      "service": ".",
+      "file": "appstore/Dockerfile",
+      "service": "appstore",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1061,8 +1061,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./assist/Dockerfile",
-      "service": ".",
+      "file": "assist/Dockerfile",
+      "service": "assist",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1099,8 +1099,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./async/Dockerfile",
-      "service": ".",
+      "file": "async/Dockerfile",
+      "service": "async",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1137,8 +1137,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./auditlog/Dockerfile",
-      "service": ".",
+      "file": "auditlog/Dockerfile",
+      "service": "auditlog",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1175,8 +1175,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./bot/Dockerfile",
-      "service": ".",
+      "file": "bot/Dockerfile",
+      "service": "bot",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1213,8 +1213,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./botproxy/Dockerfile",
-      "service": ".",
+      "file": "botproxy/Dockerfile",
+      "service": "botproxy",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1251,8 +1251,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./buildscripts/templates/service_template/Dockerfile",
-      "service": ".",
+      "file": "buildscripts/templates/service_template/Dockerfile",
+      "service": "buildscripts/templates/service_template",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1289,8 +1289,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./buildscripts/templates/worker_template/Dockerfile",
-      "service": ".",
+      "file": "buildscripts/templates/worker_template/Dockerfile",
+      "service": "buildscripts/templates/worker_template",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1327,8 +1327,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./case/Dockerfile",
-      "service": ".",
+      "file": "case/Dockerfile",
+      "service": "case",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1365,8 +1365,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./casereport/Dockerfile",
-      "service": ".",
+      "file": "casereport/Dockerfile",
+      "service": "casereport",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1403,8 +1403,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./changestream/Dockerfile",
-      "service": ".",
+      "file": "changestream/Dockerfile",
+      "service": "changestream",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1441,8 +1441,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./comment/Dockerfile",
-      "service": ".",
+      "file": "comment/Dockerfile",
+      "service": "comment",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1479,8 +1479,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./common/Dockerfile",
-      "service": ".",
+      "file": "common/Dockerfile",
+      "service": "common",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1517,8 +1517,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./connector/Dockerfile",
-      "service": ".",
+      "file": "connector/Dockerfile",
+      "service": "connector",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1555,8 +1555,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./dataset/Dockerfile",
-      "service": ".",
+      "file": "dataset/Dockerfile",
+      "service": "dataset",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1593,8 +1593,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./decisiontable/Dockerfile",
-      "service": ".",
+      "file": "decisiontable/Dockerfile",
+      "service": "decisiontable",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1631,8 +1631,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./eventsubscription/Dockerfile",
-      "service": ".",
+      "file": "eventsubscription/Dockerfile",
+      "service": "eventsubscription",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1669,8 +1669,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./eventworker/Dockerfile",
-      "service": ".",
+      "file": "eventworker/Dockerfile",
+      "service": "eventworker",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1707,8 +1707,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./externaldata/Dockerfile",
-      "service": ".",
+      "file": "externaldata/Dockerfile",
+      "service": "externaldata",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1745,8 +1745,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./filetransferworker/Dockerfile",
-      "service": ".",
+      "file": "filetransferworker/Dockerfile",
+      "service": "filetransferworker",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1783,8 +1783,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./flow/Dockerfile",
-      "service": ".",
+      "file": "flow/Dockerfile",
+      "service": "flow",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1821,8 +1821,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./form/Dockerfile",
-      "service": ".",
+      "file": "form/Dockerfile",
+      "service": "form",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1859,8 +1859,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./formreport/Dockerfile",
-      "service": ".",
+      "file": "formreport/Dockerfile",
+      "service": "formreport",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1897,8 +1897,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./gateway/Dockerfile",
-      "service": ".",
+      "file": "gateway/Dockerfile",
+      "service": "gateway",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1935,8 +1935,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./gateway/analytics/Dockerfile-local",
-      "service": ".",
+      "file": "gateway/analytics/Dockerfile-local",
+      "service": "gateway/analytics",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -1973,8 +1973,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./gateway/case/Dockerfile-case",
-      "service": ".",
+      "file": "gateway/case/Dockerfile-case",
+      "service": "gateway/case",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2011,8 +2011,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./gateway/integration-local/Dockerfile-local",
-      "service": ".",
+      "file": "gateway/integration-local/Dockerfile-local",
+      "service": "gateway/integration-local",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2049,8 +2049,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./gateway/integration-local/Dockerfile-mock",
-      "service": ".",
+      "file": "gateway/integration-local/Dockerfile-mock",
+      "service": "gateway/integration-local",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2087,8 +2087,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./gateway/lcnc/Dockerfile-local",
-      "service": ".",
+      "file": "gateway/lcnc/Dockerfile-local",
+      "service": "gateway/lcnc",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2125,8 +2125,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./gateway/lcnc/Dockerfile-mock",
-      "service": ".",
+      "file": "gateway/lcnc/Dockerfile-mock",
+      "service": "gateway/lcnc",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2163,8 +2163,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./gateway/mock/Dockerfile-mock",
-      "service": ".",
+      "file": "gateway/mock/Dockerfile-mock",
+      "service": "gateway/mock",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2201,8 +2201,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./gateway/process/Dockerfile-process",
-      "service": ".",
+      "file": "gateway/process/Dockerfile-process",
+      "service": "gateway/process",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2239,8 +2239,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./governance/Dockerfile",
-      "service": ".",
+      "file": "governance/Dockerfile",
+      "service": "governance",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2277,8 +2277,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./indexmanager/Dockerfile",
-      "service": ".",
+      "file": "indexmanager/Dockerfile",
+      "service": "indexmanager",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2315,8 +2315,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./integration/Dockerfile",
-      "service": ".",
+      "file": "integration/Dockerfile",
+      "service": "integration",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2353,8 +2353,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./maileventworker/Dockerfile",
-      "service": ".",
+      "file": "maileventworker/Dockerfile",
+      "service": "maileventworker",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2391,8 +2391,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./marketplace/Dockerfile",
-      "service": ".",
+      "file": "marketplace/Dockerfile",
+      "service": "marketplace",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2429,8 +2429,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./metadata/Dockerfile",
-      "service": ".",
+      "file": "metadata/Dockerfile",
+      "service": "metadata",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2467,8 +2467,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./notification/Dockerfile",
-      "service": ".",
+      "file": "notification/Dockerfile",
+      "service": "notification",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2505,8 +2505,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./portal/Dockerfile",
-      "service": ".",
+      "file": "portal/Dockerfile",
+      "service": "portal",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2543,8 +2543,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./process/Dockerfile",
-      "service": ".",
+      "file": "process/Dockerfile",
+      "service": "process",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2581,8 +2581,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./processreport/Dockerfile",
-      "service": ".",
+      "file": "processreport/Dockerfile",
+      "service": "processreport",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2619,8 +2619,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./route/Dockerfile",
-      "service": ".",
+      "file": "route/Dockerfile",
+      "service": "route",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2657,8 +2657,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./scheduler/Dockerfile",
-      "service": ".",
+      "file": "scheduler/Dockerfile",
+      "service": "scheduler",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2695,8 +2695,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./upload/Dockerfile",
-      "service": ".",
+      "file": "upload/Dockerfile",
+      "service": "upload",
       "total": 4,
       "errors": 0,
       "warnings": 2,
@@ -2733,8 +2733,8 @@ window.SCAN_DATA = {
       ]
     },
     {
-      "file": "./user/Dockerfile",
-      "service": ".",
+      "file": "user/Dockerfile",
+      "service": "user",
       "total": 4,
       "errors": 0,
       "warnings": 2,
