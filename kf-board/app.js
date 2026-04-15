@@ -153,7 +153,12 @@
             <div class="bar"><span style="width:${pct}%"></span></div>
           </div>
         </div>
-        <div class="svc-body"></div>
+        <div class="svc-body">
+          <div class="svc-bulk">
+            <button class="bulk-btn" data-act="expand">Expand all</button>
+            <button class="bulk-btn" data-act="collapse">Collapse all</button>
+          </div>
+        </div>
       `;
 
       const head = svc.querySelector('.svc-head');
@@ -165,37 +170,65 @@
       });
 
       const body = svc.querySelector('.svc-body');
+      const bulk = body.querySelector('.svc-bulk');
+      bulk.addEventListener('click', (e) => {
+        const btn = e.target.closest('.bulk-btn');
+        if (!btn) return;
+        e.stopPropagation();
+        const wantExpanded = btn.dataset.act === 'expand';
+        body.querySelectorAll('.finding').forEach(el => {
+          el.classList.toggle('expanded', wantExpanded);
+          if (el.dataset.fid) toggleExpanded(el.dataset.fid, wantExpanded);
+        });
+      });
       visible.forEach(f => body.appendChild(renderFinding(file.file, f)));
       root.appendChild(svc);
     }
     empty.classList.toggle('hidden', any);
   }
 
+  function isExpanded(id) { return !!(state.__expanded && state.__expanded[id]); }
+  function toggleExpanded(id, force) {
+    state.__expanded = state.__expanded || {};
+    state.__expanded[id] = (force === undefined) ? !state.__expanded[id] : force;
+    saveState();
+  }
+
   function renderFinding(file, f) {
     const id = fid(file, f);
     const status = getStatus(id);
+    const expanded = isExpanded(id);
     const sevClass = f.severity === 'ERROR' ? 'error' : f.severity === 'WARN' ? 'warn' : 'info';
     const el = document.createElement('div');
-    el.className = `finding ${status}`;
+    el.className = `finding ${status}${expanded ? ' expanded' : ''}`;
+    el.dataset.fid = id;
     el.innerHTML = `
-      <div class="finding-meta">
+      <div class="finding-summary">
+        <svg class="finding-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
         <span class="severity-badge ${sevClass}">${f.severity}</span>
-        <span class="rule-tag"><span class="rid">${f.rule}</span>${escapeHtml(RULES[f.rule] || '')}</span>
+        <span class="rule-tag"><span class="rid">${f.rule}</span></span>
+        <span class="finding-msg-inline">${escapeHtml(f.message)}</span>
+        ${f.line ? `<span class="finding-line-inline">L${f.line}</span>` : ''}
+        <span class="status-dot status-${status}" title="${status.replace('_',' ')}"></span>
       </div>
-      <div class="finding-body">
-        <div class="finding-msg">${escapeHtml(f.message)}</div>
+      <div class="finding-details">
+        <div class="rule-desc">${escapeHtml(RULES[f.rule] || '')}</div>
         ${f.roast ? `<div class="finding-roast">${escapeHtml(f.roast)}</div>` : ''}
-        ${f.line ? `<div class="finding-line">line ${f.line}</div>` : ''}
-      </div>
-      <div class="finding-actions">
-        <div class="status-pills">
-          ${['open','in_progress','fixed','wontfix'].map(s => `
-            <button class="status-pill ${s} ${status===s?'active':''}" data-status="${s}">${s.replace('_',' ')}</button>
-          `).join('')}
+        <div class="finding-controls">
+          <div class="status-pills">
+            ${['open','in_progress','fixed','wontfix'].map(s => `
+              <button class="status-pill ${s} ${status===s?'active':''}" data-status="${s}">${s.replace('_',' ')}</button>
+            `).join('')}
+          </div>
+          <input class="note-input" type="text" placeholder="note (e.g. ticket #123)" value="${escapeHtml(getNote(id))}" />
         </div>
-        <input class="note-input" type="text" placeholder="note (e.g. ticket #123)" value="${escapeHtml(getNote(id))}" />
       </div>
     `;
+    const summary = el.querySelector('.finding-summary');
+    summary.addEventListener('click', () => {
+      el.classList.toggle('expanded');
+      toggleExpanded(id, el.classList.contains('expanded'));
+    });
     el.querySelectorAll('.status-pill').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
@@ -222,29 +255,43 @@
       const sevClass = f.severity === 'ERROR' ? 'error' : f.severity === 'WARN' ? 'warn' : 'info';
       const id = fid(file.file, f);
       const status = getStatus(id);
+      const expanded = isExpanded(id);
+      card.className = `finding flat ${status}${expanded ? ' expanded' : ''}`;
       card.innerHTML = `
-        <div>
-          <div class="where">${escapeHtml(file.file)}${f.line ? `  ·  line ${f.line}` : ''}</div>
-          <div style="display:flex; gap:8px; align-items:center; margin-bottom:6px;">
-            <span class="severity-badge ${sevClass}">${f.severity}</span>
-            <span class="rule-tag"><span class="rid">${f.rule}</span>${escapeHtml(RULES[f.rule] || '')}</span>
-          </div>
-          <div class="finding-msg">${escapeHtml(f.message)}</div>
-          ${f.roast ? `<div class="finding-roast">${escapeHtml(f.roast)}</div>` : ''}
+        <div class="finding-summary">
+          <svg class="finding-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          <span class="severity-badge ${sevClass}">${f.severity}</span>
+          <span class="rule-tag"><span class="rid">${f.rule}</span></span>
+          <span class="finding-msg-inline">${escapeHtml(f.message)}</span>
+          <span class="where-inline">${escapeHtml(file.file)}${f.line ? ` · L${f.line}` : ''}</span>
+          <span class="status-dot status-${status}" title="${status.replace('_',' ')}"></span>
         </div>
-        <div class="finding-actions">
-          <div class="status-pills">
-            ${['open','in_progress','fixed','wontfix'].map(s => `
-              <button class="status-pill ${s} ${status===s?'active':''}" data-status="${s}">${s.replace('_',' ')}</button>
-            `).join('')}
+        <div class="finding-details">
+          <div class="rule-desc">${escapeHtml(RULES[f.rule] || '')}</div>
+          ${f.roast ? `<div class="finding-roast">${escapeHtml(f.roast)}</div>` : ''}
+          <div class="finding-controls">
+            <div class="status-pills">
+              ${['open','in_progress','fixed','wontfix'].map(s => `
+                <button class="status-pill ${s} ${status===s?'active':''}" data-status="${s}">${s.replace('_',' ')}</button>
+              `).join('')}
+            </div>
+            <input class="note-input" type="text" placeholder="note (e.g. ticket #123)" value="${escapeHtml(getNote(id))}" />
           </div>
-          <input class="note-input" type="text" placeholder="note (e.g. ticket #123)" value="${escapeHtml(getNote(id))}" />
         </div>
       `;
-      card.querySelectorAll('.status-pill').forEach(btn => {
-        btn.addEventListener('click', () => setStatus(id, btn.dataset.status));
+      card.querySelector('.finding-summary').addEventListener('click', () => {
+        card.classList.toggle('expanded');
+        toggleExpanded(id, card.classList.contains('expanded'));
       });
-      card.querySelector('.note-input').addEventListener('input', (e) => setNote(id, e.target.value));
+      card.querySelectorAll('.status-pill').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          setStatus(id, btn.dataset.status);
+        });
+      });
+      const note = card.querySelector('.note-input');
+      note.addEventListener('input', (e) => setNote(id, e.target.value));
+      note.addEventListener('click', (e) => e.stopPropagation());
       root.appendChild(card);
     });
   }
