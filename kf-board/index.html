@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Kissflow XG · Dockerfile Roast Board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="22" height="22"><path d="M16 3 L28 9 L28 23 L16 29 L4 23 L4 9 Z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M11 13 L16 21 L21 13" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="brand-text">
+        <div class="brand-name">Dockerfile Roast Board</div>
+        <div class="brand-sub">Kissflow XG · 61 microservices · powered by <a href="https://github.com/immanuwell/dockerfile-roast" target="_blank" rel="noreferrer">droast</a></div>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button class="btn ghost" id="exportBtn" title="Download current state as JSON">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Export
+      </button>
+      <button class="btn primary" id="resetBtn" title="Reset all tracking state">Reset state</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="card metrics">
+        <div class="metrics-title">Health overview</div>
+        <div class="metric-row">
+          <span class="metric-label">Files scanned</span>
+          <span class="metric-value" id="m-files">0</span>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Total findings</span>
+          <span class="metric-value" id="m-total">0</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="metric-row sev sev-error">
+          <span class="dot"></span>
+          <span class="metric-label">Errors</span>
+          <span class="metric-value" id="m-errors">0</span>
+        </div>
+        <div class="metric-row sev sev-warn">
+          <span class="dot"></span>
+          <span class="metric-label">Warnings</span>
+          <span class="metric-value" id="m-warns">0</span>
+        </div>
+        <div class="metric-row sev sev-info">
+          <span class="dot"></span>
+          <span class="metric-label">Info</span>
+          <span class="metric-value" id="m-infos">0</span>
+        </div>
+        <div class="metric-divider"></div>
+        <div class="progress-wrap">
+          <div class="progress-label">
+            <span>Resolution progress</span>
+            <span id="m-progress-pct">0%</span>
+          </div>
+          <div class="progress"><div class="progress-bar" id="m-progress-bar"></div></div>
+          <div class="progress-foot"><span id="m-resolved">0</span> of <span id="m-total2">0</span> findings resolved</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Filter</div>
+        <div class="search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input id="search" type="text" placeholder="Search service or rule…" />
+        </div>
+        <div class="filter-group">
+          <div class="filter-label">Severity</div>
+          <div class="chip-row">
+            <button class="chip sev-error active" data-sev="ERROR">Errors</button>
+            <button class="chip sev-warn active" data-sev="WARN">Warnings</button>
+            <button class="chip sev-info active" data-sev="INFO">Info</button>
+          </div>
+        </div>
+        <div class="filter-group">
+          <div class="filter-label">Status</div>
+          <div class="chip-row">
+            <button class="chip status-open active" data-status="open">Open</button>
+            <button class="chip status-progress active" data-status="in_progress">In progress</button>
+            <button class="chip status-fixed active" data-status="fixed">Fixed</button>
+            <button class="chip status-wontfix active" data-status="wontfix">Won't fix</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Top rules</div>
+        <ol class="rules-list" id="rules-list"></ol>
+      </div>
+
+      <div class="card legend">
+        <div class="card-title">Tip</div>
+        <p class="muted small">Click any service row to expand its findings. Use the status pills on each finding to track remediation. Your tracking state lives in this browser <em>(localStorage)</em>.</p>
+      </div>
+    </aside>
+
+    <section class="content">
+      <div class="content-head">
+        <h1>Microservices</h1>
+        <div class="view-toggle" role="tablist">
+          <button class="vt active" data-view="services" role="tab">By service</button>
+          <button class="vt" data-view="findings" role="tab">All findings</button>
+          <button class="vt" data-view="rules" role="tab">By rule</button>
+        </div>
+      </div>
+      <div id="empty" class="empty hidden">No findings match your filters.</div>
+      <div id="view-services"></div>
+      <div id="view-findings" class="hidden"></div>
+      <div id="view-rules" class="hidden"></div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>Generated with <a href="https://github.com/immanuwell/dockerfile-roast" target="_blank" rel="noreferrer">dockerfile-roast</a> · Board fork: <a href="https://github.com/karunakaranks/docker-scan/tree/kf" target="_blank" rel="noreferrer">karunakaranks/docker-scan@kf</a></span>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="rules.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

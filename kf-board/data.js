@@ -1,0 +1,2774 @@
+window.SCAN_DATA = {
+  "scanned_at": "2026-04-15",
+  "source_repo": "kissflow-xg",
+  "tool": "droast",
+  "tool_version": "0.1.0",
+  "files": [
+    {
+      "file": "./admin/Dockerfile-job",
+      "service": ".",
+      "total": 21,
+      "errors": 1,
+      "warnings": 10,
+      "infos": 10,
+      "findings": [
+        {
+          "rule": "DF036",
+          "severity": "WARN",
+          "line": 0,
+          "message": "No CMD or ENTRYPOINT defined \u2014 the container has no default command",
+          "roast": "No CMD or ENTRYPOINT? This container starts, does nothing, and immediately exits like an intern on their first day who didn't read the onboarding docs. Tell it what to run."
+        },
+        {
+          "rule": "DF058",
+          "severity": "WARN",
+          "line": 0,
+          "message": "Both wget and curl are used \u2014 pick one and use it consistently",
+          "roast": "You're using both wget and curl in the same Dockerfile. They do the same thing. Pick one. Commit to it. Your image doesn't need two download tools any more than it needs two fire extinguishers."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 1,
+          "message": "'kissflow/adminv2:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF002",
+          "severity": "ERROR",
+          "line": 5,
+          "message": "Container is explicitly set to run as root",
+          "roast": "Congratulations, you're running as root. Your security team is crying, your CISO is drafting a strongly-worded email, and a hacker somewhere just smiled."
+        },
+        {
+          "rule": "DF003",
+          "severity": "WARN",
+          "line": 7,
+          "message": "8 consecutive RUN instructions could be merged into one",
+          "roast": "8 separate RUN layers? Your image has more layers than a mid-2000s emo band. Combine them with && and save everyone's bandwidth."
+        },
+        {
+          "rule": "DF056",
+          "severity": "INFO",
+          "line": 12,
+          "message": "wget without --progress flag produces verbose progress output in build logs",
+          "roast": "wget without --progress=dot:giga will spam your build logs with a progress bar that looks great locally and fills 50MB of CI log storage. Use --progress=dot:giga or -q to stay quiet."
+        },
+        {
+          "rule": "DF004",
+          "severity": "WARN",
+          "line": 13,
+          "message": "apt cache not cleaned after install \u2014 adds unnecessary layer size",
+          "roast": "Not cleaning the apt cache is like finishing a meal and leaving all the wrappers in the container. Your image is now a trash can. A very expensive trash can stored in ECR."
+        },
+        {
+          "rule": "DF005",
+          "severity": "INFO",
+          "line": 13,
+          "message": "apt-get install without pinned package versions",
+          "roast": "Unpinned packages: a bold way to ensure your build is different every single time. 'It worked on my machine' is a lifestyle choice, not a deployment strategy."
+        },
+        {
+          "rule": "DF016",
+          "severity": "INFO",
+          "line": 13,
+          "message": "apt-get install without --no-install-recommends installs extra packages",
+          "roast": "Installing without --no-install-recommends? apt is now installing packages you didn't ask for, like a waiter who brings you a full bread basket when you said you're gluten-free. `--no-install-recommends` is right there."
+        },
+        {
+          "rule": "DF004",
+          "severity": "WARN",
+          "line": 17,
+          "message": "apt cache not cleaned after install \u2014 adds unnecessary layer size",
+          "roast": "Not cleaning the apt cache is like finishing a meal and leaving all the wrappers in the container. Your image is now a trash can. A very expensive trash can stored in ECR."
+        },
+        {
+          "rule": "DF010",
+          "severity": "WARN",
+          "line": 17,
+          "message": "sudo used inside a container \u2014 likely unnecessary",
+          "roast": "sudo inside a Docker container? You're already root (probably). sudo is just a formality at this point, like putting a 'Wet Floor' sign in the ocean."
+        },
+        {
+          "rule": "DF005",
+          "severity": "INFO",
+          "line": 17,
+          "message": "apt-get install without pinned package versions",
+          "roast": "Unpinned packages: a bold way to ensure your build is different every single time. 'It worked on my machine' is a lifestyle choice, not a deployment strategy."
+        },
+        {
+          "rule": "DF016",
+          "severity": "INFO",
+          "line": 17,
+          "message": "apt-get install without --no-install-recommends installs extra packages",
+          "roast": "Installing without --no-install-recommends? apt is now installing packages you didn't ask for, like a waiter who brings you a full bread basket when you said you're gluten-free. `--no-install-recommends` is right there."
+        },
+        {
+          "rule": "DF004",
+          "severity": "WARN",
+          "line": 18,
+          "message": "apt cache not cleaned after install \u2014 adds unnecessary layer size",
+          "roast": "Not cleaning the apt cache is like finishing a meal and leaving all the wrappers in the container. Your image is now a trash can. A very expensive trash can stored in ECR."
+        },
+        {
+          "rule": "DF010",
+          "severity": "WARN",
+          "line": 18,
+          "message": "sudo used inside a container \u2014 likely unnecessary",
+          "roast": "sudo inside a Docker container? You're already root (probably). sudo is just a formality at this point, like putting a 'Wet Floor' sign in the ocean."
+        },
+        {
+          "rule": "DF057",
+          "severity": "WARN",
+          "line": 18,
+          "message": "RUN with pipe but no pipefail \u2014 failed commands in the pipe are silently ignored",
+          "roast": "A pipe in RUN without `set -o pipefail`. If the left side of that pipe fails, bash shrugs and moves on. The exit code is whatever the last command returns. Add `set -o pipefail` at the start of the RUN."
+        },
+        {
+          "rule": "DF005",
+          "severity": "INFO",
+          "line": 18,
+          "message": "apt-get install without pinned package versions",
+          "roast": "Unpinned packages: a bold way to ensure your build is different every single time. 'It worked on my machine' is a lifestyle choice, not a deployment strategy."
+        },
+        {
+          "rule": "DF035",
+          "severity": "INFO",
+          "line": 18,
+          "message": "curl without --fail \u2014 HTTP errors won't cause the RUN step to fail",
+          "roast": "curl without --fail means a 404 or 500 response silently succeeds. Your build will happily continue after downloading an error page and treating it as a binary. Add --fail and save yourself a 2am debugging session."
+        },
+        {
+          "rule": "DF016",
+          "severity": "INFO",
+          "line": 18,
+          "message": "apt-get install without --no-install-recommends installs extra packages",
+          "roast": "Installing without --no-install-recommends? apt is now installing packages you didn't ask for, like a waiter who brings you a full bread basket when you said you're gluten-free. `--no-install-recommends` is right there."
+        },
+        {
+          "rule": "DF056",
+          "severity": "INFO",
+          "line": 22,
+          "message": "wget without --progress flag produces verbose progress output in build logs",
+          "roast": "wget without --progress=dot:giga will spam your build logs with a progress bar that looks great locally and fills 50MB of CI log storage. Use --progress=dot:giga or -q to stay quiet."
+        }
+      ]
+    },
+    {
+      "file": "./automation/account_clone/Dockerfile",
+      "service": ".",
+      "total": 12,
+      "errors": 1,
+      "warnings": 8,
+      "infos": 3,
+      "findings": [
+        {
+          "rule": "DF036",
+          "severity": "WARN",
+          "line": 0,
+          "message": "No CMD or ENTRYPOINT defined \u2014 the container has no default command",
+          "roast": "No CMD or ENTRYPOINT? This container starts, does nothing, and immediately exits like an intern on their first day who didn't read the onboarding docs. Tell it what to run."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF062",
+          "severity": "ERROR",
+          "line": 16,
+          "message": "ENV variable 'BUILD_NUMBER' references itself in the same statement",
+          "roast": "ENV BUILD_NUMBER=${BUILD_NUMBER} \u2014 you're defining a variable using itself. It hasn't been set yet at this point in the same ENV instruction. The result will be an empty string. Split it into two ENV statements."
+        },
+        {
+          "rule": "DF003",
+          "severity": "WARN",
+          "line": 18,
+          "message": "7 consecutive RUN instructions could be merged into one",
+          "roast": "7 separate RUN layers? Your image has more layers than a mid-2000s emo band. Combine them with && and save everyone's bandwidth."
+        },
+        {
+          "rule": "DF057",
+          "severity": "WARN",
+          "line": 20,
+          "message": "RUN with pipe but no pipefail \u2014 failed commands in the pipe are silently ignored",
+          "roast": "A pipe in RUN without `set -o pipefail`. If the left side of that pipe fails, bash shrugs and moves on. The exit code is whatever the last command returns. Add `set -o pipefail` at the start of the RUN."
+        },
+        {
+          "rule": "DF057",
+          "severity": "WARN",
+          "line": 21,
+          "message": "RUN with pipe but no pipefail \u2014 failed commands in the pipe are silently ignored",
+          "roast": "A pipe in RUN without `set -o pipefail`. If the left side of that pipe fails, bash shrugs and moves on. The exit code is whatever the last command returns. Add `set -o pipefail` at the start of the RUN."
+        },
+        {
+          "rule": "DF028",
+          "severity": "WARN",
+          "line": 22,
+          "message": "apt-get update in a separate RUN from apt-get install causes cache poisoning",
+          "roast": "Splitting `apt-get update` and `apt-get install` into separate RUN layers is a classic mistake. Docker caches the update layer and your install may use a stale index. Combine them with && or enjoy mysterious 404 errors."
+        },
+        {
+          "rule": "DF004",
+          "severity": "WARN",
+          "line": 23,
+          "message": "apt cache not cleaned after install \u2014 adds unnecessary layer size",
+          "roast": "Not cleaning the apt cache is like finishing a meal and leaving all the wrappers in the container. Your image is now a trash can. A very expensive trash can stored in ECR."
+        },
+        {
+          "rule": "DF005",
+          "severity": "INFO",
+          "line": 23,
+          "message": "apt-get install without pinned package versions",
+          "roast": "Unpinned packages: a bold way to ensure your build is different every single time. 'It worked on my machine' is a lifestyle choice, not a deployment strategy."
+        },
+        {
+          "rule": "DF016",
+          "severity": "INFO",
+          "line": 23,
+          "message": "apt-get install without --no-install-recommends installs extra packages",
+          "roast": "Installing without --no-install-recommends? apt is now installing packages you didn't ask for, like a waiter who brings you a full bread basket when you said you're gluten-free. `--no-install-recommends` is right there."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 25,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./analyticsmigration/Dockerfile",
+      "service": ".",
+      "total": 11,
+      "errors": 1,
+      "warnings": 5,
+      "infos": 5,
+      "findings": [
+        {
+          "rule": "DF036",
+          "severity": "WARN",
+          "line": 0,
+          "message": "No CMD or ENTRYPOINT defined \u2014 the container has no default command",
+          "roast": "No CMD or ENTRYPOINT? This container starts, does nothing, and immediately exits like an intern on their first day who didn't read the onboarding docs. Tell it what to run."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF004",
+          "severity": "WARN",
+          "line": 18,
+          "message": "apt cache not cleaned after install \u2014 adds unnecessary layer size",
+          "roast": "Not cleaning the apt cache is like finishing a meal and leaving all the wrappers in the container. Your image is now a trash can. A very expensive trash can stored in ECR."
+        },
+        {
+          "rule": "DF005",
+          "severity": "INFO",
+          "line": 18,
+          "message": "apt-get install without pinned package versions",
+          "roast": "Unpinned packages: a bold way to ensure your build is different every single time. 'It worked on my machine' is a lifestyle choice, not a deployment strategy."
+        },
+        {
+          "rule": "DF016",
+          "severity": "INFO",
+          "line": 18,
+          "message": "apt-get install without --no-install-recommends installs extra packages",
+          "roast": "Installing without --no-install-recommends? apt is now installing packages you didn't ask for, like a waiter who brings you a full bread basket when you said you're gluten-free. `--no-install-recommends` is right there."
+        },
+        {
+          "rule": "DF015",
+          "severity": "ERROR",
+          "line": 24,
+          "message": "apt-get install without -y flag will hang waiting for user input",
+          "roast": "apt-get install without -y? Your build is going to sit there, patiently waiting for a 'yes' that will never come, like a golden retriever waiting for an owner who's on a cruise ship."
+        },
+        {
+          "rule": "DF004",
+          "severity": "WARN",
+          "line": 24,
+          "message": "apt cache not cleaned after install \u2014 adds unnecessary layer size",
+          "roast": "Not cleaning the apt cache is like finishing a meal and leaving all the wrappers in the container. Your image is now a trash can. A very expensive trash can stored in ECR."
+        },
+        {
+          "rule": "DF005",
+          "severity": "INFO",
+          "line": 24,
+          "message": "apt-get install without pinned package versions",
+          "roast": "Unpinned packages: a bold way to ensure your build is different every single time. 'It worked on my machine' is a lifestyle choice, not a deployment strategy."
+        },
+        {
+          "rule": "DF016",
+          "severity": "INFO",
+          "line": 24,
+          "message": "apt-get install without --no-install-recommends installs extra packages",
+          "roast": "Installing without --no-install-recommends? apt is now installing packages you didn't ask for, like a waiter who brings you a full bread basket when you said you're gluten-free. `--no-install-recommends` is right there."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 36,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./automation/automation/Dockerfile",
+      "service": ".",
+      "total": 5,
+      "errors": 1,
+      "warnings": 3,
+      "infos": 1,
+      "findings": [
+        {
+          "rule": "DF036",
+          "severity": "WARN",
+          "line": 0,
+          "message": "No CMD or ENTRYPOINT defined \u2014 the container has no default command",
+          "roast": "No CMD or ENTRYPOINT? This container starts, does nothing, and immediately exits like an intern on their first day who didn't read the onboarding docs. Tell it what to run."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF062",
+          "severity": "ERROR",
+          "line": 7,
+          "message": "ENV variable 'BUILD_NUMBER' references itself in the same statement",
+          "roast": "ENV BUILD_NUMBER=${BUILD_NUMBER} \u2014 you're defining a variable using itself. It hasn't been set yet at this point in the same ENV instruction. The result will be an empty string. Split it into two ENV statements."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 18,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./base/Dockerfile",
+      "service": ".",
+      "total": 6,
+      "errors": 1,
+      "warnings": 2,
+      "infos": 3,
+      "findings": [
+        {
+          "rule": "DF036",
+          "severity": "WARN",
+          "line": 0,
+          "message": "No CMD or ENTRYPOINT defined \u2014 the container has no default command",
+          "roast": "No CMD or ENTRYPOINT? This container starts, does nothing, and immediately exits like an intern on their first day who didn't read the onboarding docs. Tell it what to run."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF062",
+          "severity": "ERROR",
+          "line": 7,
+          "message": "ENV variable 'PATH' references itself in the same statement",
+          "roast": "ENV PATH=${PATH} \u2014 you're defining a variable using itself. It hasn't been set yet at this point in the same ENV instruction. The result will be an empty string. Split it into two ENV statements."
+        },
+        {
+          "rule": "DF005",
+          "severity": "INFO",
+          "line": 9,
+          "message": "apt-get install without pinned package versions",
+          "roast": "Unpinned packages: a bold way to ensure your build is different every single time. 'It worked on my machine' is a lifestyle choice, not a deployment strategy."
+        },
+        {
+          "rule": "DF016",
+          "severity": "INFO",
+          "line": 9,
+          "message": "apt-get install without --no-install-recommends installs extra packages",
+          "roast": "Installing without --no-install-recommends? apt is now installing packages you didn't ask for, like a waiter who brings you a full bread basket when you said you're gluten-free. `--no-install-recommends` is right there."
+        },
+        {
+          "rule": "DF049",
+          "severity": "WARN",
+          "line": 15,
+          "message": "COPY --from=ghcr.io/astral-sh/uv:0.9.8 references an undefined build stage",
+          "roast": "COPY --from=ghcr.io/astral-sh/uv:0.9.8 and there's no FROM ... AS ghcr.io/astral-sh/uv:0.9.8 anywhere above. Copying from thin air. Docker will reject this."
+        }
+      ]
+    },
+    {
+      "file": "./batchuser/Dockerfile",
+      "service": ".",
+      "total": 5,
+      "errors": 1,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF062",
+          "severity": "ERROR",
+          "line": 17,
+          "message": "ENV variable 'BUILD_NUMBER' references itself in the same statement",
+          "roast": "ENV BUILD_NUMBER=${BUILD_NUMBER} \u2014 you're defining a variable using itself. It hasn't been set yet at this point in the same ENV instruction. The result will be an empty string. Split it into two ENV statements."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 18,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./externalconnection/Dockerfile",
+      "service": ".",
+      "total": 19,
+      "errors": 0,
+      "warnings": 9,
+      "infos": 10,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF003",
+          "severity": "WARN",
+          "line": 12,
+          "message": "10 consecutive RUN instructions could be merged into one",
+          "roast": "10 separate RUN layers? Your image has more layers than a mid-2000s emo band. Combine them with && and save everyone's bandwidth."
+        },
+        {
+          "rule": "DF004",
+          "severity": "WARN",
+          "line": 19,
+          "message": "apt cache not cleaned after install \u2014 adds unnecessary layer size",
+          "roast": "Not cleaning the apt cache is like finishing a meal and leaving all the wrappers in the container. Your image is now a trash can. A very expensive trash can stored in ECR."
+        },
+        {
+          "rule": "DF005",
+          "severity": "INFO",
+          "line": 19,
+          "message": "apt-get install without pinned package versions",
+          "roast": "Unpinned packages: a bold way to ensure your build is different every single time. 'It worked on my machine' is a lifestyle choice, not a deployment strategy."
+        },
+        {
+          "rule": "DF016",
+          "severity": "INFO",
+          "line": 19,
+          "message": "apt-get install without --no-install-recommends installs extra packages",
+          "roast": "Installing without --no-install-recommends? apt is now installing packages you didn't ask for, like a waiter who brings you a full bread basket when you said you're gluten-free. `--no-install-recommends` is right there."
+        },
+        {
+          "rule": "DF057",
+          "severity": "WARN",
+          "line": 20,
+          "message": "RUN with pipe but no pipefail \u2014 failed commands in the pipe are silently ignored",
+          "roast": "A pipe in RUN without `set -o pipefail`. If the left side of that pipe fails, bash shrugs and moves on. The exit code is whatever the last command returns. Add `set -o pipefail` at the start of the RUN."
+        },
+        {
+          "rule": "DF035",
+          "severity": "INFO",
+          "line": 20,
+          "message": "curl without --fail \u2014 HTTP errors won't cause the RUN step to fail",
+          "roast": "curl without --fail means a 404 or 500 response silently succeeds. Your build will happily continue after downloading an error page and treating it as a binary. Add --fail and save yourself a 2am debugging session."
+        },
+        {
+          "rule": "DF057",
+          "severity": "WARN",
+          "line": 21,
+          "message": "RUN with pipe but no pipefail \u2014 failed commands in the pipe are silently ignored",
+          "roast": "A pipe in RUN without `set -o pipefail`. If the left side of that pipe fails, bash shrugs and moves on. The exit code is whatever the last command returns. Add `set -o pipefail` at the start of the RUN."
+        },
+        {
+          "rule": "DF035",
+          "severity": "INFO",
+          "line": 21,
+          "message": "curl without --fail \u2014 HTTP errors won't cause the RUN step to fail",
+          "roast": "curl without --fail means a 404 or 500 response silently succeeds. Your build will happily continue after downloading an error page and treating it as a binary. Add --fail and save yourself a 2am debugging session."
+        },
+        {
+          "rule": "DF028",
+          "severity": "WARN",
+          "line": 22,
+          "message": "apt-get update in a separate RUN from apt-get install causes cache poisoning",
+          "roast": "Splitting `apt-get update` and `apt-get install` into separate RUN layers is a classic mistake. Docker caches the update layer and your install may use a stale index. Combine them with && or enjoy mysterious 404 errors."
+        },
+        {
+          "rule": "DF004",
+          "severity": "WARN",
+          "line": 23,
+          "message": "apt cache not cleaned after install \u2014 adds unnecessary layer size",
+          "roast": "Not cleaning the apt cache is like finishing a meal and leaving all the wrappers in the container. Your image is now a trash can. A very expensive trash can stored in ECR."
+        },
+        {
+          "rule": "DF005",
+          "severity": "INFO",
+          "line": 23,
+          "message": "apt-get install without pinned package versions",
+          "roast": "Unpinned packages: a bold way to ensure your build is different every single time. 'It worked on my machine' is a lifestyle choice, not a deployment strategy."
+        },
+        {
+          "rule": "DF016",
+          "severity": "INFO",
+          "line": 23,
+          "message": "apt-get install without --no-install-recommends installs extra packages",
+          "roast": "Installing without --no-install-recommends? apt is now installing packages you didn't ask for, like a waiter who brings you a full bread basket when you said you're gluten-free. `--no-install-recommends` is right there."
+        },
+        {
+          "rule": "DF004",
+          "severity": "WARN",
+          "line": 31,
+          "message": "apt cache not cleaned after install \u2014 adds unnecessary layer size",
+          "roast": "Not cleaning the apt cache is like finishing a meal and leaving all the wrappers in the container. Your image is now a trash can. A very expensive trash can stored in ECR."
+        },
+        {
+          "rule": "DF005",
+          "severity": "INFO",
+          "line": 31,
+          "message": "apt-get install without pinned package versions",
+          "roast": "Unpinned packages: a bold way to ensure your build is different every single time. 'It worked on my machine' is a lifestyle choice, not a deployment strategy."
+        },
+        {
+          "rule": "DF016",
+          "severity": "INFO",
+          "line": 31,
+          "message": "apt-get install without --no-install-recommends installs extra packages",
+          "roast": "Installing without --no-install-recommends? apt is now installing packages you didn't ask for, like a waiter who brings you a full bread basket when you said you're gluten-free. `--no-install-recommends` is right there."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 37,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./automation/mongo_backup/Dockerfile",
+      "service": ".",
+      "total": 13,
+      "errors": 0,
+      "warnings": 7,
+      "infos": 6,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 1,
+          "message": "'ubuntu:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF003",
+          "severity": "WARN",
+          "line": 3,
+          "message": "6 consecutive RUN instructions could be merged into one",
+          "roast": "6 separate RUN layers? Your image has more layers than a mid-2000s emo band. Combine them with && and save everyone's bandwidth."
+        },
+        {
+          "rule": "DF028",
+          "severity": "WARN",
+          "line": 7,
+          "message": "apt-get update in a separate RUN from apt-get install causes cache poisoning",
+          "roast": "Splitting `apt-get update` and `apt-get install` into separate RUN layers is a classic mistake. Docker caches the update layer and your install may use a stale index. Combine them with && or enjoy mysterious 404 errors."
+        },
+        {
+          "rule": "DF004",
+          "severity": "WARN",
+          "line": 8,
+          "message": "apt cache not cleaned after install \u2014 adds unnecessary layer size",
+          "roast": "Not cleaning the apt cache is like finishing a meal and leaving all the wrappers in the container. Your image is now a trash can. A very expensive trash can stored in ECR."
+        },
+        {
+          "rule": "DF005",
+          "severity": "INFO",
+          "line": 8,
+          "message": "apt-get install without pinned package versions",
+          "roast": "Unpinned packages: a bold way to ensure your build is different every single time. 'It worked on my machine' is a lifestyle choice, not a deployment strategy."
+        },
+        {
+          "rule": "DF016",
+          "severity": "INFO",
+          "line": 8,
+          "message": "apt-get install without --no-install-recommends installs extra packages",
+          "roast": "Installing without --no-install-recommends? apt is now installing packages you didn't ask for, like a waiter who brings you a full bread basket when you said you're gluten-free. `--no-install-recommends` is right there."
+        },
+        {
+          "rule": "DF051",
+          "severity": "WARN",
+          "line": 9,
+          "message": "pip install without version pinning \u2014 use package==version for reproducibility",
+          "roast": "pip install with no version pins. Every build pulls 'latest' and one day something breaks and you spend three hours bisecting which transitive dependency changed. Use package==version."
+        },
+        {
+          "rule": "DF030",
+          "severity": "INFO",
+          "line": 9,
+          "message": "pip install without --no-cache-dir wastes space in the image layer",
+          "roast": "pip install without --no-cache-dir? You're carrying around a pip cache in your production image like a tourist with a suitcase full of hotel shampoos. You don't need those. Add --no-cache-dir."
+        },
+        {
+          "rule": "DF030",
+          "severity": "INFO",
+          "line": 16,
+          "message": "pip install without --no-cache-dir wastes space in the image layer",
+          "roast": "pip install without --no-cache-dir? You're carrying around a pip cache in your production image like a tourist with a suitcase full of hotel shampoos. You don't need those. Add --no-cache-dir."
+        },
+        {
+          "rule": "DF007",
+          "severity": "WARN",
+          "line": 19,
+          "message": "COPY . copies the entire build context \u2014 consider a .dockerignore file",
+          "roast": "COPY . \u2014 dumping your entire project including node_modules, .git history, and that .env file with the production database password into the image. Bold. Reckless. Very DevOps of you."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 22,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./apidocs/Dockerfile",
+      "service": ".",
+      "total": 6,
+      "errors": 0,
+      "warnings": 3,
+      "infos": 3,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF051",
+          "severity": "WARN",
+          "line": 9,
+          "message": "pip install without version pinning \u2014 use package==version for reproducibility",
+          "roast": "pip install with no version pins. Every build pulls 'latest' and one day something breaks and you spend three hours bisecting which transitive dependency changed. Use package==version."
+        },
+        {
+          "rule": "DF030",
+          "severity": "INFO",
+          "line": 9,
+          "message": "pip install without --no-cache-dir wastes space in the image layer",
+          "roast": "pip install without --no-cache-dir? You're carrying around a pip cache in your production image like a tourist with a suitcase full of hotel shampoos. You don't need those. Add --no-cache-dir."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 16,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./admin/Dockerfile",
+      "service": ".",
+      "total": 5,
+      "errors": 0,
+      "warnings": 3,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF020",
+          "severity": "WARN",
+          "line": 0,
+          "message": "No USER instruction found \u2014 container will run as root by default",
+          "roast": "No USER set? Bold strategy. Running everything as root in prod is a great way to ensure job security \u2014 for your incident response team."
+        },
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 18,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./lowcode/Dockerfile",
+      "service": ".",
+      "total": 5,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 3,
+      "findings": [
+        {
+          "rule": "DF012",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No HEALTHCHECK defined",
+          "roast": "No HEALTHCHECK? Your container is basically on the honor system. 'It's fine, I'm sure it's fine.' Meanwhile Kubernetes is just restarting it every 30 seconds wondering what went wrong."
+        },
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF011",
+          "severity": "WARN",
+          "line": 1,
+          "message": "Single-stage build with a heavy build image \u2014 consider multi-stage builds",
+          "roast": "Shipping your entire build toolchain to production? Your 2GB Go image is basically a free gift to anyone who gets shell access. Multi-stage builds exist. They're fantastic. Use them."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 58,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        },
+        {
+          "rule": "DF031",
+          "severity": "INFO",
+          "line": 63,
+          "message": "npm install used \u2014 consider npm ci for reproducible builds",
+          "roast": "`npm install` in a Dockerfile: non-deterministic, slower than `npm ci`, and potentially installs different versions than your lockfile specifies. `npm ci` exists specifically for CI/CD and containers. Use it."
+        }
+      ]
+    },
+    {
+      "file": "./accounts/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 19,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./analytics/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 22,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./analyticssyncworker/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 18,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./application/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 17,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./appstore/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 16,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./assist/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 19,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./async/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 16,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./auditlog/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 18,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./bot/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 17,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./botproxy/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 18,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./buildscripts/templates/service_template/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 19,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./buildscripts/templates/worker_template/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 19,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./case/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 39,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./casereport/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 22,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./changestream/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 17,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./comment/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 16,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./common/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 17,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./connector/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 16,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./dataset/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 33,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./decisiontable/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 33,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./eventsubscription/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 16,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./eventworker/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 16,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./externaldata/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 23,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./filetransferworker/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 16,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./flow/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 17,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./form/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 40,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./formreport/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 22,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./gateway/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF020",
+          "severity": "WARN",
+          "line": 0,
+          "message": "No USER instruction found \u2014 container will run as root by default",
+          "roast": "No USER set? Bold strategy. Running everything as root in prod is a great way to ensure job security \u2014 for your incident response team."
+        },
+        {
+          "rule": "DF012",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No HEALTHCHECK defined",
+          "roast": "No HEALTHCHECK? Your container is basically on the honor system. 'It's fine, I'm sure it's fine.' Meanwhile Kubernetes is just restarting it every 30 seconds wondering what went wrong."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 1,
+          "message": "'nginx:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        }
+      ]
+    },
+    {
+      "file": "./gateway/analytics/Dockerfile-local",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF020",
+          "severity": "WARN",
+          "line": 0,
+          "message": "No USER instruction found \u2014 container will run as root by default",
+          "roast": "No USER set? Bold strategy. Running everything as root in prod is a great way to ensure job security \u2014 for your incident response team."
+        },
+        {
+          "rule": "DF012",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No HEALTHCHECK defined",
+          "roast": "No HEALTHCHECK? Your container is basically on the honor system. 'It's fine, I'm sure it's fine.' Meanwhile Kubernetes is just restarting it every 30 seconds wondering what went wrong."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 1,
+          "message": "'nginx:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        }
+      ]
+    },
+    {
+      "file": "./gateway/case/Dockerfile-case",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF020",
+          "severity": "WARN",
+          "line": 0,
+          "message": "No USER instruction found \u2014 container will run as root by default",
+          "roast": "No USER set? Bold strategy. Running everything as root in prod is a great way to ensure job security \u2014 for your incident response team."
+        },
+        {
+          "rule": "DF012",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No HEALTHCHECK defined",
+          "roast": "No HEALTHCHECK? Your container is basically on the honor system. 'It's fine, I'm sure it's fine.' Meanwhile Kubernetes is just restarting it every 30 seconds wondering what went wrong."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 1,
+          "message": "'nginx:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        }
+      ]
+    },
+    {
+      "file": "./gateway/integration-local/Dockerfile-local",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF020",
+          "severity": "WARN",
+          "line": 0,
+          "message": "No USER instruction found \u2014 container will run as root by default",
+          "roast": "No USER set? Bold strategy. Running everything as root in prod is a great way to ensure job security \u2014 for your incident response team."
+        },
+        {
+          "rule": "DF012",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No HEALTHCHECK defined",
+          "roast": "No HEALTHCHECK? Your container is basically on the honor system. 'It's fine, I'm sure it's fine.' Meanwhile Kubernetes is just restarting it every 30 seconds wondering what went wrong."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 1,
+          "message": "'nginx:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        }
+      ]
+    },
+    {
+      "file": "./gateway/integration-local/Dockerfile-mock",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF020",
+          "severity": "WARN",
+          "line": 0,
+          "message": "No USER instruction found \u2014 container will run as root by default",
+          "roast": "No USER set? Bold strategy. Running everything as root in prod is a great way to ensure job security \u2014 for your incident response team."
+        },
+        {
+          "rule": "DF012",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No HEALTHCHECK defined",
+          "roast": "No HEALTHCHECK? Your container is basically on the honor system. 'It's fine, I'm sure it's fine.' Meanwhile Kubernetes is just restarting it every 30 seconds wondering what went wrong."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 1,
+          "message": "'nginx:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        }
+      ]
+    },
+    {
+      "file": "./gateway/lcnc/Dockerfile-local",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF020",
+          "severity": "WARN",
+          "line": 0,
+          "message": "No USER instruction found \u2014 container will run as root by default",
+          "roast": "No USER set? Bold strategy. Running everything as root in prod is a great way to ensure job security \u2014 for your incident response team."
+        },
+        {
+          "rule": "DF012",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No HEALTHCHECK defined",
+          "roast": "No HEALTHCHECK? Your container is basically on the honor system. 'It's fine, I'm sure it's fine.' Meanwhile Kubernetes is just restarting it every 30 seconds wondering what went wrong."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 1,
+          "message": "'nginx:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        }
+      ]
+    },
+    {
+      "file": "./gateway/lcnc/Dockerfile-mock",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF020",
+          "severity": "WARN",
+          "line": 0,
+          "message": "No USER instruction found \u2014 container will run as root by default",
+          "roast": "No USER set? Bold strategy. Running everything as root in prod is a great way to ensure job security \u2014 for your incident response team."
+        },
+        {
+          "rule": "DF012",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No HEALTHCHECK defined",
+          "roast": "No HEALTHCHECK? Your container is basically on the honor system. 'It's fine, I'm sure it's fine.' Meanwhile Kubernetes is just restarting it every 30 seconds wondering what went wrong."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 1,
+          "message": "'nginx:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        }
+      ]
+    },
+    {
+      "file": "./gateway/mock/Dockerfile-mock",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF020",
+          "severity": "WARN",
+          "line": 0,
+          "message": "No USER instruction found \u2014 container will run as root by default",
+          "roast": "No USER set? Bold strategy. Running everything as root in prod is a great way to ensure job security \u2014 for your incident response team."
+        },
+        {
+          "rule": "DF012",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No HEALTHCHECK defined",
+          "roast": "No HEALTHCHECK? Your container is basically on the honor system. 'It's fine, I'm sure it's fine.' Meanwhile Kubernetes is just restarting it every 30 seconds wondering what went wrong."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 1,
+          "message": "'nginx:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        }
+      ]
+    },
+    {
+      "file": "./gateway/process/Dockerfile-process",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF020",
+          "severity": "WARN",
+          "line": 0,
+          "message": "No USER instruction found \u2014 container will run as root by default",
+          "roast": "No USER set? Bold strategy. Running everything as root in prod is a great way to ensure job security \u2014 for your incident response team."
+        },
+        {
+          "rule": "DF012",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No HEALTHCHECK defined",
+          "roast": "No HEALTHCHECK? Your container is basically on the honor system. 'It's fine, I'm sure it's fine.' Meanwhile Kubernetes is just restarting it every 30 seconds wondering what went wrong."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 1,
+          "message": "'nginx:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        }
+      ]
+    },
+    {
+      "file": "./governance/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 19,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./indexmanager/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 17,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./integration/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 20,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./maileventworker/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 16,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./marketplace/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 16,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./metadata/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 20,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./notification/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 18,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./portal/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 18,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./process/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 38,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./processreport/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 22,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./route/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 18,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./scheduler/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 17,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./upload/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 25,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    },
+    {
+      "file": "./user/Dockerfile",
+      "service": ".",
+      "total": 4,
+      "errors": 0,
+      "warnings": 2,
+      "infos": 2,
+      "findings": [
+        {
+          "rule": "DF022",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No EXPOSE instruction \u2014 consider documenting which ports this service uses",
+          "roast": "No EXPOSE? Your container is a mystery box. Is it a web server? A database? A very slow random number generator? EXPOSE is documentation \u2014 it tells the next developer which port to knock on."
+        },
+        {
+          "rule": "DF033",
+          "severity": "INFO",
+          "line": 0,
+          "message": "No .dockerignore file found in the same directory",
+          "roast": "No .dockerignore? You're COPY-ing your entire build context including node_modules, .git, test fixtures, and possibly your diary. A .dockerignore takes 5 minutes to write and saves you from shipping your secrets to production."
+        },
+        {
+          "rule": "DF001",
+          "severity": "WARN",
+          "line": 2,
+          "message": "'kissflow/base${BASE_IMAGE_VERSION}:latest' uses an unpinned image tag",
+          "roast": "Pinning to 'latest' is like ordering 'whatever' at a restaurant and then complaining when your image breaks in prod. Use a real tag."
+        },
+        {
+          "rule": "DF064",
+          "severity": "WARN",
+          "line": 29,
+          "message": "useradd without -l flag \u2014 high UIDs create oversized /var/log/lastlog entries",
+          "roast": "useradd without -l (--no-log-init): with a high UID, this creates a sparse file in /var/log/lastlog that can balloon your image size by gigabytes. Add -l or use --no-log-init."
+        }
+      ]
+    }
+  ]
+};
